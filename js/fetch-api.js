@@ -6,6 +6,22 @@ function getMovies(){
         .then((resultsObject) => {console.log(resultsObject)})
 }
 
+function getMoviesNoArrow(){
+    return fetch(API_URL)
+        .then(function(response){
+            return response.json()
+        })
+        .then(function(resultsObject){
+            console.log(resultsObject)
+                resultsObject.forEach((movie) => {console.log(movie.title)})
+        })
+        // (resultsObject) => {resultsObject.forEach((result) => (result.title))}
+}
+
+var html = "";
+html += `<div></div>`
+
+
 
 //*** Notes from Fridays lecture ***
 //const API_URL = "https://vagabond-glacier-verse.glitch.me/dogs";
