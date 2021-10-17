@@ -1,25 +1,58 @@
 "use strict"
+$(document).ready(function(){
+    var widthv = 40;
+    function moveProgressBar(){
+        var intervalId = setInterval(frame, 5000);
+        function frame(){
+            if(widthv >= 100){
+                clearInterval(intervalId);
+            } else {
+                widthv = widthv + 60;
+                $(".progress-bar").css(`width, ${widthv}%`)
+            }
+        }
+    }
+    moveProgressBar();
+
 const API_URL = "https://developing-darkened-sceptre.glitch.me/movies";
 function getMovies(){
     return fetch(API_URL)
         .then((response) => response.json())
-        .then((resultsObject) => {console.log(resultsObject)})
+        .then((resultsObject) => {
+            console.log(resultsObject);
+        })
 }
 
 function getMoviesNoArrow(){
+    var html = "";
     return fetch(API_URL)
         .then(function(response){
             return response.json()
         })
         .then(function(resultsObject){
             console.log(resultsObject)
-                resultsObject.forEach((movie) => {console.log(movie.title)})
-        })
-        // (resultsObject) => {resultsObject.forEach((result) => (result.title))}
-}
+            resultsObject.forEach(function(movie, index, array) {
+                console.log(movie.title + ": " + movie.actors + ", " + movie.director)
+                $("#loadingbar").removeClass("d-flex").addClass("d-none");
 
-var html = "";
-html += `<div></div>`
+                html += `<div><h2>${movie.title}</h2><p>${movie.year}, ${movie.genre}</p><p>${movie.actors}</p></div>`
+                $("#movie-div").html(html);
+            })
+        })
+}
+getMoviesNoArrow(); //calling the function here runs the function once the page loads
+
+}); //end of document.ready function
+
+// movie.actors
+// movie.director
+// movie.genre
+// movie.plot
+// movie.poster
+// movie.rating
+// movie.title
+// movie.year
+
 
 
 
