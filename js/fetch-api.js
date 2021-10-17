@@ -40,6 +40,11 @@ function getMoviesNoArrow(){
             })
         })
 }
+
+// When the form is submitted, the page should not reload / refresh, instead,
+// your javascript should make a POST request to /movies with the information the user put into the form
+
+
     var title = $("#title");
     var rating = $("#rating");
     $("#add-movie").click(function(e){
