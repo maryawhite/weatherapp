@@ -40,6 +40,36 @@ function getMoviesNoArrow(){
             })
         })
 }
+    var title = $("#title");
+    var rating = $("#rating");
+    $("#add-movie").click(function(e){
+        e.preventDefault();
+        checkInputs();
+    });
+    function checkInputs(){
+        var titleValue = title.val().trim();
+        var ratingValue = rating.val().trim();
+        if(titleValue === ""){
+            setErrorFor(title, "title cannot be blank");
+        } else {
+            setSuccessFor(title);
+        }
+        if(ratingValue === ""){
+            setErrorFor(rating, "rating cannot be blank");
+        } else {
+            setSuccessFor(rating);
+        }
+    }
+    function setErrorFor(input, message){
+        $("small").text(message).attr("class", "visible");
+        $(input).parent().attr("class", "form-control error");
+        $("i.fa-exclamation-circle").attr("class", "visible");
+    }
+    function setSuccessFor(input){
+        $(input).parent().attr("class", "form-control success");
+        $("i.fa-check-circle").attr("class", "visible");
+    }
+
 getMoviesNoArrow(); //calling the function here runs the function once the page loads
 
 }); //end of document.ready function
