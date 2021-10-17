@@ -17,10 +17,17 @@
 <!--end progress bar-->
 
   <div id="movie-div"></div>
-
+<hr>
   <!--add your own movie-->
+<h2>Add your own Movie title and rating</h2>
+  <div class="input-group">
+    <input id="user-entry-title" type="text" class="form-control" placeholder="add movie title" aria-label="" aria-describedby="basic-addon1">
+    <div class="input-group-append">
+      <button id="user-entry-button" class="btn btn-success" type="button">ADD Movie</button>
+    </div>
+  </div>
   <form>
-    <label for="user-entry-rating"></label>
+    <label for="user-entry-rating">Rating</label>
     <select id="user-entry-rating">
       <option>-</option>
       <option>1</option>
@@ -30,12 +37,6 @@
       <option>5</option>
     </select>
   </form>
-  <div class="input-group">
-    <input id="user-entry-title" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-    <div class="input-group-append">
-      <button id="user-entry-button" class="btn btn-success" type="button">ADD Movie</button>
-    </div>
-  </div>
 
 
 </div> <!--end of container div-->
