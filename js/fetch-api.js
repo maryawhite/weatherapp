@@ -47,20 +47,34 @@ function getMoviesNoArrow(){
 // your javascript should make a POST request to /movies with the information the user put into the form
 
 
-    var customerEntry = $("#user-entry-title").val();
-    console.log(customerEntry);
-    var customerRating = $("#user-entry-rating").val();
-    console.log(customerRating);
-    $("#add-movie").on("click", function(){
-        addCustomerInput();
+    $("#user-entry-button").on("click", function(){
+        addUserInput();
     });
-function addCustomerInput(){
-    var newArray = {}
-    var customerEntry = $("#user-entry-title").val();
-    var customerRating = $("#user-entry-rating").val();
-    newArray.push({title: customerEntry, rating: customerRating});
-    console.log(newArray)
-}
+
+    function addUserInput(){
+        var userInput = $("#user-entry-title").val();
+        console.log(userInput)
+        var userRating = $("#user-entry-rating").val();
+        console.log(userRating);
+    }
+    // function createDog(dog) {
+//     let options = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(dog)
+//     }
+//     return fetch(API_URL, options)
+//         .then((response)=>response.json())
+// }
+// let charlie = {
+//     name: 'Charlie',
+//     isGoodDog: false,
+//     age: 8
+// }
+//createDog(charlie).then((newDog)=>console.log(newdog));
+
 
 getMoviesNoArrow(); //calling the function here runs the function once the page loads
 
@@ -127,7 +141,7 @@ getMoviesNoArrow(); //calling the function here runs the function once the page 
 //Create dog
 // function createDog(dog) {
 //     let options = {
-//         method: 'POST',       //use put to edit the dog, we are not creating a new one
+//         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json',
 //         },
