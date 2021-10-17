@@ -11,28 +11,20 @@
 <body>
 <h1>Fetch API</h1>
 <!--begin progress bar-->
-<div class="progress" id="loadingbar">
-  <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Loading</div>
-</div>
+  <div class="progress progress-bar bg-primary d-flex justify-content-center align-items-center m-4 p-4" id="loadingbar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Loading</div>
 <!--end progress bar-->
 
 <div class="container">
   <div id="movie-div"></div>
 </div> <!--end of container div-->
   <form class="form" id="form">
-    <div class="form-control">
+    <div class="input-group">
       <label>Title</label>
-      <input type="text" placeholder="title" id="title">
-      <i class="fas fa-check-circle"></i>
-      <i class="fas fa-exclamation-circle"></i>
-      <small>Error Message</small>
+      <input id="user-entry-title" type="text" placeholder="title">
     </div>
-    <div class="form-control">
+    <div class="input-group">
       <label>Rating</label>
-      <input type="text" placeholder="rating" id="rating">
-      <i class="fas fa-check-circle"></i>
-      <i class="fas fa-exclamation-circle"></i>
-      <small>Error Message</small>
+      <input id="user-entry-rating" type="text" placeholder="rating">
     </div>
     <button id="add-movie">Add Movie</button>
   </form>

@@ -1,18 +1,20 @@
 "use strict"
 $(document).ready(function(){
-    var widthv = 40;
-    function moveProgressBar(){
-        var intervalId = setInterval(frame, 5000);
-        function frame(){
-            if(widthv >= 100){
-                clearInterval(intervalId);
-            } else {
-                widthv = widthv + 60;
-                $(".progress-bar").css(`width, ${widthv}%`)
-            }
-        }
+    var current_progress = 10;
+    function moveProgressBar() {
+        var interval = setInterval(function () {
+            current_progress += 10;
+            $("#loadingbar")
+                .css("width", current_progress + "%")
+                .css({"background-color": "blue", "color": "white"})
+                .attr("aria-valuenow", current_progress)
+                .text(current_progress + "% Complete")
+            if (current_progress >= 100)
+                clearInterval(interval);
+        }, 1000);
     }
     moveProgressBar();
+    //https://codepen.io/gustitammam/pen/RRXGdj
 
 const API_URL = "https://developing-darkened-sceptre.glitch.me/movies";
 function getMovies(){
@@ -45,35 +47,20 @@ function getMoviesNoArrow(){
 // your javascript should make a POST request to /movies with the information the user put into the form
 
 
-    var title = $("#title");
-    var rating = $("#rating");
-    $("#add-movie").click(function(e){
-        e.preventDefault();
-        checkInputs();
+    var customerEntry = $("#user-entry-title").val();
+    console.log(customerEntry);
+    var customerRating = $("#user-entry-rating").val();
+    console.log(customerRating);
+    $("#add-movie").on("click", function(){
+        addCustomerInput();
     });
-    function checkInputs(){
-        var titleValue = title.val().trim();
-        var ratingValue = rating.val().trim();
-        if(titleValue === ""){
-            setErrorFor(title, "title cannot be blank");
-        } else {
-            setSuccessFor(title);
-        }
-        if(ratingValue === ""){
-            setErrorFor(rating, "rating cannot be blank");
-        } else {
-            setSuccessFor(rating);
-        }
-    }
-    function setErrorFor(input, message){
-        $("small").text(message).attr("class", "visible");
-        $(input).parent().attr("class", "form-control error");
-        $("i.fa-exclamation-circle").attr("class", "visible");
-    }
-    function setSuccessFor(input){
-        $(input).parent().attr("class", "form-control success");
-        $("i.fa-check-circle").attr("class", "visible");
-    }
+function addCustomerInput(){
+    var newArray = {}
+    var customerEntry = $("#user-entry-title").val();
+    var customerRating = $("#user-entry-rating").val();
+    newArray.push({title: customerEntry, rating: customerRating});
+    console.log(newArray)
+}
 
 getMoviesNoArrow(); //calling the function here runs the function once the page loads
 
