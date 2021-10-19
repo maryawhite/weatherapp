@@ -16,47 +16,101 @@ $(document).ready(function(){
     moveProgressBar();
     //https://codepen.io/gustitammam/pen/RRXGdj
 
-const API_URL = "https://developing-darkened-sceptre.glitch.me/movies";
-function getMovies(){
-    return fetch(API_URL)
-        .then((response) => response.json())
-        .then((resultsObject) => {
-            console.log(resultsObject);
-        })
-}
+    let API_URL = "https://lizard-erratic-astronomy.glitch.me/movies";
 
-function getMoviesNoArrow(){
-    var html = "";
-    return fetch(API_URL)
-        .then(function(response){
-            return response.json()
-        })
-        .then(function(resultsObject){
-            console.log(resultsObject)
-            resultsObject.forEach(function(movie, index, array) {
-                console.log(movie.title + ": " + movie.actors + ", " + movie.director)
-                $("#loadingbar").removeClass("d-flex").addClass("d-none");
-
-                html += `<div><h2>${movie.title}</h2><p>${movie.year}, ${movie.genre}</p><p>${movie.actors}</p></div>`
-                $("#movie-div").html(html);
+    function getMovies() {
+        var html = "";
+        return fetch(API_URL)
+            .then(function (response) {
+                return response.json();
             })
-        })
-}
-
-// When the form is submitted, the page should not reload / refresh, instead,
-// your javascript should make a POST request to /movies with the information the user put into the form
-
-
-    $("#user-entry-button").on("click", function(){
-        addUserInput();
-    });
-
-    function addUserInput(){
-        var userInput = $("#user-entry-title").val();
-        console.log(userInput)
-        var userRating = $("#user-entry-rating").val();
-        console.log(userRating);
+            .then(function (resultsObject) {
+                console.log(resultsObject)
+                resultsObject.forEach(function (movie, index, array) {
+                    $("#loadingbar").removeClass("d-flex").addClass("d-none");
+//Populates movies in HTML
+                    html += `<div><h2 >${movie.title}</h2><img style="width: 150px" src="${movie.poster}"><p>${movie.year}, ${movie.genre}</p><p>Actors: ${movie.actors}</p><p>Plot: ${movie.plot}</p><p>Rating: ${movie.rating}</p></div><div><button class="delete" data-id="${movie.id}">Delete</button></div><div><button type='button' class="edit-movie btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-id="${movie.id}">Edit</button></div>`
+                    $("#movie-div").html(html);
+                    //Deletes Each Movie
+                    $(".delete").click(function(){
+                        deleteMovie($(this).data("id"))
+                    });
+                    //allow user to edit a movie
+                    $(".edit-movie").click(function(){
+                        $("#edit-movies").removeClass("d-none").addClass("d-block")
+                        editMovie($(this).data("id"))
+                    })
+                })
+            })
     }
+    getMovies();
+
+
+    function editMovie(movie) {
+        let options = {
+            method: 'PUT',       //use put to edit the movie, we are not creating a new one
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movie)    //what is body. body is referring to the body of the request
+        }
+        return fetch(`${API_URL}/${movie.id}`, options)
+            .then((response)=>response.json())
+    }
+
+
+    //variables from the form input
+    //when the user clicks on the button to save edits,
+    $("#save-edit-form").click(function(){
+        var title = $("#edit-title").val();
+        var rating = $("#edit-rating").val();
+        var actors = $("#edit-actor").val();
+        var plot = $("#edit-plot").val();
+        editMovie({title, rating, plot, actors}).then(function(res){
+            console.log(res);
+            editMovie(res).then((data)=>console.log(data))
+
+        });
+    })
+
+    $("#user-movies").click(function(){
+        let title = $("#user-entry-title").val();
+        let rating = $("#user-entry-rating").val();
+        let plot = $("#user-entry-plot").val();
+        let actors = $("#user-entry-actor").val();
+        let year = $("#user-entry-year").val();
+        let genre = $("#user-entry-genre").val();
+        createMovies({title, rating, plot, actors, year, genre}).then(function (res){
+            console.log(res);
+        });
+    });
+//Allow user to create movie
+    function createMovies(movie) {
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movie)
+        }
+        return fetch(API_URL, options)
+            .then((response) => response.json())
+    }
+
+    //Delete Method for 'FOREACH' function to delete
+    let deleteMovie = (id) => fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()
+    ).then((jsonData) => location.reload())
+        .catch(error => console.log(error));
+
+});
+//end of document.ready function
+// end of document .ready
+
     // function createDog(dog) {
 //     let options = {
 //         method: 'POST',
@@ -76,9 +130,6 @@ function getMoviesNoArrow(){
 //createDog(charlie).then((newDog)=>console.log(newdog));
 
 
-getMoviesNoArrow(); //calling the function here runs the function once the page loads
-
-}); //end of document.ready function
 
 // movie.actors
 // movie.director
