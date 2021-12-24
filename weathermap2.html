@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--MapBox CDN Below-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
     <title>WeatherMap</title>
 </head>
 <body>
+<div id="todayis"></div>
+<div id="coordinates"></div>
+<div id="current-location"></div>
+<div id="current-temp"></div>
+<div id="current-humidity"></div>
+<div id="current-sunrise-sunset"></div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="keys.js"></script>
+<script src="js/jquery.js"></script>
+<script src=".idea/keys.js"></script>
+<script src="js/mapbox-geocoder-utils.js"></script>
 <script src="js/weathermap2.js"></script>
 </body>
 </html>
