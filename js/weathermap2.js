@@ -19,10 +19,11 @@ $("#searchform").click(function (e) {
         }).done(function (data) {
             console.log(data);
             var todaysDate = data.current.dt;
-            $("#todayis").html(`<p>Today's date: ${convertDate(todaysDate)}</p>`)
-            $("#coordinates").html(`<p>Coordinates Lat: ${data.lat} Lon: ${data.lon}</p>`)
+            $("#current-heading").html(`<h1>Current Conditions</h1>`);
+            $("#todayis").html(`<h3>${convertDate(todaysDate)}</h3>`);
             $("#current-temp").html(`<p> Current Temp: ${data.current.temp}&#176;F</p>`);
             $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity}&#37;</p>`);
+            $("#coordinates").html(`<p>Coordinates Lat: ${data.lat} Lon: ${data.lon}</p>`);
 
             reverseGeocodeRef(data.lat, data.lon, mapboxApiKey).then(function (res) {
                 console.log(res);
@@ -33,6 +34,14 @@ $("#searchform").click(function (e) {
             $("#weather-icon").html(`<img class="icon" src=http://openweathermap.org/img/w/${data.current.weather[0].icon}.png>`)
             $("#weather-desc").html(`<p>${data.current.weather[0].main}</p>`)
             $("#wind").html(`<p>Wind Gusts: ${data.current.wind_gust} mph Wind Speed: ${data.current.wind_speed} mph</p>`)
+
+            //start daily forecast
+            let forecast = "";
+            for(let i = 0; i < data.daily.length; i++){
+                forecast += `<div class="daily-div"><h4>${convertDate(data.daily[i].dt)}</h4><p>Low/High <br>${data.daily[i].temp.min}&#176;F / ${data.daily[i].temp.max}&#176;F</p><p>Humidity: ${data.daily[i].humidity}&#37;</p><p>Wind Speed: ${data.daily[i].wind_speed}</p><p>Wind Gusts: ${data.daily[i].wind_gust}</p></div>`
+            }
+            $("#daily-forecast").html(forecast);
+            $("#daily-heading").html(`<h2>Daily Forecast</h2>`)
 
         }); //end of .done
     }); //end of geocode

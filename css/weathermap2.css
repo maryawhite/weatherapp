@@ -9,7 +9,7 @@ body {
 
 .flex-container {
     margin: 1em;
-    width: 100%;
+    width: auto;
     display: flex;
     flex-direction: column;
 }
@@ -26,6 +26,48 @@ body {
     margin: 1em;
 }
 
+.daily-div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-style: groove;
+    border-color: crimson;
+    border-radius: 2%;
+    margin: .5em;
+    padding: .5em;
+    text-align: center;
+}
+
+/*.card {*/
+/*    flex-direction: column;*/
+/*}*/
+
+.daily-div p {
+    /*border-style: dotted solid dotted;*/
+}
+
+.current-border {
+    border-style: groove;
+    width: auto;
+    border-radius: 3% 3% 3% 3% / 43% 43% 43% 43%;
+    border-color: crimson;
+    padding-bottom: 1em;
+}
+
+#daily-heading {
+    text-align: center;
+}
+
+#daily-forecast {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    margin: auto;
+    justify-content: center;
+}
+
+
+
 /*small devices*/
 @media screen and (min-width:576px) {
 
@@ -33,5 +75,12 @@ body {
 
 /*medium devices 768px and larger*/
 @media screen and (min-width:768px) {
+    #daily-forecast {
+        display: flex;
+        flex-wrap: wrap;
+        width: auto;
+        margin: auto;
+        justify-content: flex-start;
+    }
 
 }
