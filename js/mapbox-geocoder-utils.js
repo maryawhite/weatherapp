@@ -51,3 +51,16 @@ function reverseGeocode(coordinates, token) {
             return data.features[0].place_name;
         });
 }
+
+function reverseGeocodeRef(lat, lon, token) {
+    var baseUrl = 'https://api.mapbox.com';
+    var endPoint = '/geocoding/v5/mapbox.places/';
+    return fetch(baseUrl + endPoint + lon + "," + lat + '.json' + "?" + 'access_token=' + token)
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            return data.features[2].place_name;  //this one should print just the city, state, zip and country
+        });
+}

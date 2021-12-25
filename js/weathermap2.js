@@ -12,37 +12,31 @@ $.get("https://api.openweathermap.org/data/2.5/onecall", {
     var sunrise = data.current.sunrise;
     $("#todayis").html(`<p>Today's date: ${convertDate(todaysDate)}</p>`)
     $("#coordinates").html(`<p>Coordinates Lat: ${data.lat} Lon: ${data.lon}</p>`)
-    $("#current-temp").html("<p> Current Temp: " + data.current.temp + "</p>");
-    $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity} </p>`);
+    $("#current-temp").html(`<p> Current Temp: ${data.current.temp}&#176;F</p>`);
+    $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity}&#37;</p>`);
 
-    // reverseGeocode(coordinates, token){
-    //     var baseUrl = 'https://api.mapbox.com';
-    //     var endPoint = '/geocoding/v5/mapbox.places/';
-    //     return fetch(baseUrl + endPoint + data.lon + "," + data.lat + '.json' + '?' + 'access_token=' + mapboxApiKey)
-    //         .then(function(res){
-    //             return res.json();
-    //         })
-    //         .then(function(mapdata){
-    //             console.log(mapdata);
-    //             return mapdata.features[2].place_name;
-    //         });
-    // }
+    // reverseGeocode({lat: data.lat, lng: data.lon}, mapboxApiKey).then(function(results){
+    //     console.log(results);
+    //     $("#current-location").html(`Location: ${results}`)
+    //
+    // }); //end of reverseGeoCode
 
-    reverseGeocode({lat: data.lat, lng: data.lon}, mapboxApiKey).then(function(results){
-        console.log(results);
-        $("#current-location").html(`Current Location: ${results}`)
+reverseGeocodeRef(data.lat, data.lon, mapboxApiKey).then(function(res){
+    console.log(res);
+    $("#current-location").html(`Location: ${res}`)
+}); //end of reverseGeocodeRef
 
-    }); //end of reverseGeoCode
+    $("#current-sunrise-sunset").html(`<p><i class="fas fa-sunrise"></i> Sunrise: ${convertTime(data.current.sunrise)} <i class="fas fa-sunset"></i>  Sunset: ${convertTime(data.current.sunset)} </p>`)
+    $("#weather-icon").html(`<img src=http://openweathermap.org/img/w/${data.current.weather[0].icon}.png>`)
+    $("#weather-desc").html(`<p>${data.current.weather[0].main}</p>`)
+    $("#wind").html(`<p>Wind Gusts: ${data.current.wind_gust} mph Wind Speed: ${data.current.wind_speed} mph</p>`)
 
-    $("#current-sunrise-sunset").html(`<p>${convertTimeStamptoTime()}</p>`)
-    function convertTimeStamptoTime(){
-        var unixTimestamp = data.current.sunrise;
-        var dateObj = new Date(unixTimestamp * 1000);
-        var utcString = dateObj.toUTCString();
-        var time = utcString.slice(-11, -4);
+    $("#searchform").click(function(e){
+        e.preventDefault();
+        let query = $("#search").val();
+        console.log(query);
+    });
 
-        return time;
-    }
 }); //end of .done
 
 function convertDate(dtNum){
@@ -53,5 +47,21 @@ function convertDate(dtNum){
     return humanDateFormat;
 }
 
+function convertTime(time){
+    var time = new Date(time * 1000).toLocaleTimeString("en-US")
+    return time;
+}
+
+//the function below works for time, but the other function works better and is shorter
+// function convertTimeStamptoTime(){
+//     var unixTimestamp = data.current.sunrise;
+//     var dateObj = new Date(unixTimestamp * 1000);
+//     var hours = dateObj.getHours();
+//     var minutes = "0" + dateObj.getMinutes();
+//     var seconds = "0" + dateObj.getSeconds();
+//     var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+//
+//     return formattedTime;
+// }
 
 

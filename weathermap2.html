@@ -5,20 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--MapBox CDN Below-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet'/>
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!--custom css-->
+    <link rel="stylesheet" href="css/weathermap2.css">
     <title>WeatherMap</title>
 </head>
 <body>
-<div id="todayis"></div>
-<div id="coordinates"></div>
-<div id="current-location"></div>
-<div id="current-temp"></div>
-<div id="current-humidity"></div>
-<div id="current-sunrise-sunset"></div>
+<div class="flex-container">
+    <div class="centered-div">
+        <div id="todayis"></div>
+        <div id="weather-icon"></div>
+        <div id="weather-desc"></div>
+        <div id="current-temp"></div>
+        <div id="current-humidity"></div>
+        <div id="current-sunrise-sunset"></div>
+        <div id="wind"></div>
+        <div id="coordinates"></div>
+        <div id="current-location"></div>
+        <form id="searchform">
+            <label for="search">Enter a city, state</label>
+            <input type="text" id="search" name="search">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="js/jquery.js"></script>
 <script src=".idea/keys.js"></script>
 <script src="js/mapbox-geocoder-utils.js"></script>
