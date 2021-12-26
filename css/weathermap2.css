@@ -8,10 +8,12 @@ body {
 }
 
 .flex-container {
+    position: relative;
     margin: 1em;
     width: auto;
     display: flex;
     flex-direction: column;
+    padding-bottom:51px;
 }
 
 .centered-div {
@@ -73,6 +75,19 @@ body {
 
 #weather-desc h3 {
     margin-top: 0;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #87cefa;
+    color: whitesmoke;
+    text-align: center;
+    font-size: smaller;
+    height: 50px;
+    visibility: hidden;
 }
 
 

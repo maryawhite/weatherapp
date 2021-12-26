@@ -43,6 +43,7 @@ $("#searchform").click(function (e) {
 
             //start daily forecast
             $("#img-container").css("visibility", "visible");
+            $("footer").css("visibility", "visible");
 
             let forecast = "";
             for(let i = 0; i < data.daily.length; i++){
