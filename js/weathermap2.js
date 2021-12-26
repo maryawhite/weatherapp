@@ -18,12 +18,13 @@ $("#searchform").click(function (e) {
             exclude: "minutely,hourly",
         }).done(function (data) {
             console.log(data);
+            $(".current-border").css("visibility", "visible");
             var todaysDate = data.current.dt;
             $("#current-heading").html(`<h1>Current Conditions</h1>`);
             $("#todayis").html(`<h3>${convertDate(todaysDate)}</h3>`);
-            $("#current-temp").html(`<p> Current Temp: ${data.current.temp}&#176;F</p>`);
+            $("#current-temp").html(`<h3> Current Temperature: ${Math.round(data.current.temp)}&#176;F</h3>`);
             $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity}&#37;</p>`);
-            $("#coordinates").html(`<p>Coordinates Lat: ${data.lat} Lon: ${data.lon}</p>`);
+            $("#coordinates").html(`<p>Coordinates: Lat: ${data.lat} Lon: ${data.lon}</p>`);
 
             reverseGeocodeRef(data.lat, data.lon, mapboxApiKey).then(function (res) {
                 console.log(res);
@@ -32,16 +33,23 @@ $("#searchform").click(function (e) {
 
             $("#current-sunrise-sunset").html(`<p><i class="fas fa-sunrise"></i> Sunrise: ${convertTime(data.current.sunrise)} <i class="fas fa-sunset"></i>  Sunset: ${convertTime(data.current.sunset)} </p>`)
             $("#weather-icon").html(`<img class="icon" src=http://openweathermap.org/img/w/${data.current.weather[0].icon}.png>`)
-            $("#weather-desc").html(`<p>${data.current.weather[0].main}</p>`)
-            $("#wind").html(`<p>Wind Gusts: ${data.current.wind_gust} mph Wind Speed: ${data.current.wind_speed} mph</p>`)
+            $("#weather-desc").html(`<h3>${data.current.weather[0].main}</h3>`)
+
+            if(data.current.wind_gust == null){
+                $("#wind").html(`<p>Wind Speed: ${data.current.wind_speed} mph / Gusts: NR </p>`)
+            } else{
+                $("#wind").html(`<p>Wind Speed: ${data.current.wind_speed} mph / Gusts: ${data.current.wind_gust} mph </p>`)
+            }
 
             //start daily forecast
+            $("#img-container").css("visibility", "visible");
+
             let forecast = "";
             for(let i = 0; i < data.daily.length; i++){
-                forecast += `<div class="daily-div"><h4>${convertDate(data.daily[i].dt)}</h4><p>Low/High <br>${data.daily[i].temp.min}&#176;F / ${data.daily[i].temp.max}&#176;F</p><p>Humidity: ${data.daily[i].humidity}&#37;</p><p>Wind Speed: ${data.daily[i].wind_speed}</p><p>Wind Gusts: ${data.daily[i].wind_gust}</p></div>`
+                forecast += `<div class="daily-div"><h4>${convertDate(data.daily[i].dt)}</h4><img class="daily-icon" src=http://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png><p><strong>${data.daily[i].weather[0].main}</strong></p><p>High/Low <br>${Math.round(data.daily[i].temp.max)}&#176;F / ${Math.round(data.daily[i].temp.min)}&#176;F</p><p>Humidity: ${data.daily[i].humidity}&#37;</p><p>Wind Speed: ${data.daily[i].wind_speed} mph</p><p>Wind Gusts: ${data.daily[i].wind_gust} mph</p></div>`
             }
+            $("#daily-heading").html(`<h1>8 Day Forecast</h1>`)
             $("#daily-forecast").html(forecast);
-            $("#daily-heading").html(`<h2>Daily Forecast</h2>`)
 
         }); //end of .done
     }); //end of geocode

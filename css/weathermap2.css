@@ -30,32 +30,32 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    border-style: groove;
-    border-color: crimson;
     border-radius: 2%;
-    margin: .5em;
+    margin: .5em 2em;
     padding: .5em;
     text-align: center;
-}
-
-/*.card {*/
-/*    flex-direction: column;*/
-/*}*/
-
-.daily-div p {
-    /*border-style: dotted solid dotted;*/
+    background-color: #87cefa;
 }
 
 .current-border {
-    border-style: groove;
+    border-style: dotted;
     width: auto;
     border-radius: 3% 3% 3% 3% / 43% 43% 43% 43%;
-    border-color: crimson;
+    border-color: whitesmoke;
     padding-bottom: 1em;
+    visibility: hidden;
 }
 
 #daily-heading {
     text-align: center;
+}
+
+#img-container {
+    background-image: url("/img/calbeck.jpeg");
+    background-size: cover;
+    border-radius: 3% 3% 3% 3% / 43% 43% 43% 43%;
+    padding: 1em;
+    visibility: hidden;
 }
 
 #daily-forecast {
@@ -66,6 +66,14 @@ body {
     justify-content: center;
 }
 
+.daily-icon {
+    width: 50%;
+    margin: auto;
+}
+
+#weather-desc h3 {
+    margin-top: 0;
+}
 
 
 /*small devices*/
