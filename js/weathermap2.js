@@ -19,7 +19,7 @@ $("#searchform").click(function (e) {
         }).done(function (data) {
             console.log(data);
             $(".current-border").css("visibility", "visible");
-            var todaysDate = data.current.dt;
+            let todaysDate = data.current.dt;
             $("#current-heading").html(`<h1>Current Conditions</h1>`);
             $("#todayis").html(`<h3>${convertDate(todaysDate)}</h3>`);
             $("#current-temp").html(`<h3> Current Temperature: ${Math.round(data.current.temp)}&#176;F</h3>`);
@@ -32,7 +32,7 @@ $("#searchform").click(function (e) {
             }); //end of reverseGeocodeRef
 
             $("#current-sunrise-sunset").html(`<p><i class="fas fa-sunrise"></i> Sunrise: ${convertTime(data.current.sunrise)} <i class="fas fa-sunset"></i>  Sunset: ${convertTime(data.current.sunset)} </p>`)
-            $("#weather-icon").html(`<img class="icon" src=http://openweathermap.org/img/w/${data.current.weather[0].icon}.png>`)
+            $("#weather-icon").html(`<img class="icon" src=http://openweathermap.org/img/w/${data.current.weather[0].icon}.png alt="weather icon">`)
             $("#weather-desc").html(`<h3>${data.current.weather[0].main}</h3>`)
 
             if(data.current.wind_gust == null){
@@ -47,7 +47,7 @@ $("#searchform").click(function (e) {
 
             let forecast = "";
             for(let i = 0; i < data.daily.length; i++){
-                forecast += `<div class="daily-div"><h4>${convertDate(data.daily[i].dt)}</h4><img class="daily-icon" src=http://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png><p><strong>${data.daily[i].weather[0].main}</strong></p><p>High/Low <br>${Math.round(data.daily[i].temp.max)}&#176;F / ${Math.round(data.daily[i].temp.min)}&#176;F</p><p>Humidity: ${data.daily[i].humidity}&#37;</p><p>Wind Speed: ${data.daily[i].wind_speed} mph</p><p>Wind Gusts: ${data.daily[i].wind_gust} mph</p></div>`
+                forecast += `<div class="daily-div"><h4>${convertDate(data.daily[i].dt)}</h4><img class="daily-icon" src=http://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png alt="weather icon"><p><strong>${data.daily[i].weather[0].main}</strong></p><p>High/Low <br>${Math.round(data.daily[i].temp.max)}&#176;F / ${Math.round(data.daily[i].temp.min)}&#176;F</p><p>Humidity: ${data.daily[i].humidity}&#37;</p><p>Wind Speed: ${data.daily[i].wind_speed} mph</p><p>Wind Gusts: ${data.daily[i].wind_gust} mph</p></div>`
             }
             $("#daily-heading").html(`<h1>8 Day Forecast</h1>`)
             $("#daily-forecast").html(forecast);
