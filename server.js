@@ -5,6 +5,10 @@ const path = require('path');
 //where we expose files or directories for public use
 app.use(express.static(path.join(__dirname)));
 
+const mapboxApiKey = process.env.mapboxApiKey;
+const openWeatherAppKey = process.env.openWeatherAppKey;
+const openWeatherAppRedo = process.env.openWeatherAppRedo;
+
 //where we set our routes
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));

@@ -5,13 +5,13 @@ $("#searchform").click(function (e) {
     let query = $("#search").val();
     console.log(query);
 
-    geocode(query, mapboxApiKey).then(function (geoResult) {
+    geocode(query, process.env.mapboxApiKey).then(function (geoResult) {
         console.log(geoResult);
         let lon = geoResult[0];
         let lat = geoResult[1];
 
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
-            APPID: openWeatherAppRedo,
+            APPID: process.env.openWeatherAppRedo,
             lat: lat,
             lon: lon,
             units: "imperial",
@@ -26,7 +26,7 @@ $("#searchform").click(function (e) {
             $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity}&#37;</p>`);
             $("#coordinates").html(`<p>Coordinates: Lat: ${data.lat} Lon: ${data.lon}</p>`);
 
-            reverseGeocodeRef(data.lat, data.lon, mapboxApiKey).then(function (res) {
+            reverseGeocodeRef(data.lat, data.lon, process.env.mapboxApiKey).then(function (res) {
                 console.log(res);
                 $("#current-location").html(`Location: ${res}`)
             }); //end of reverseGeocodeRef
