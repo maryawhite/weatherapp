@@ -1,6 +1,4 @@
 "use strict"
-let mapboxApiKey = process.env.mapboxApiKey;
-let openWeatherAppRedo = process.env.openWeatherAppRedo;
 
 $("#searchform").click(function (e) {
     e.preventDefault();
