@@ -1,4 +1,6 @@
 "use strict"
+let mapboxApiKey = process.env.mapboxApiKey;
+
 
 $("#searchform").click(function (e) {
     e.preventDefault();
