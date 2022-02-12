@@ -6,6 +6,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname)));
 
 mapboxApiKey=process.env.mapboxApiKey;
+console.log(mapboxApiKey);
 // const openWeatherAppKey = process.env.openWeatherAppKey;
 openWeatherAppRedo=process.env.openWeatherAppRedo;
 
