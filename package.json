@@ -1,0 +1,30 @@
+{
+  "name": "redo-weathermap-project",
+  "version": "1.0.0",
+  "description": "weathermap project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maryawhite/redo-weathermap-project.git"
+  },
+  "keywords": [
+    "weatherapp",
+    "mapbox",
+    "javascript",
+    "jquery",
+    "ajax"
+  ],
+  "author": "Mary White",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maryawhite/redo-weathermap-project/issues"
+  },
+  "homepage": "https://github.com/maryawhite/redo-weathermap-project#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
