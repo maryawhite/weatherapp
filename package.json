@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/maryawhite/redo-weathermap-project#readme",
   "dependencies": {
+    "mapbox-gl": "^2.6.1",
     "express": "^4.17.2"
   }
 }
