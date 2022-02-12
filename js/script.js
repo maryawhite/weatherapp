@@ -3,10 +3,10 @@
 $("#searchform").click(function (e) {
     e.preventDefault();
     let query = $("#search").val();
-    console.log(query);
+    // console.log(query);
 
     geocode(query, "pk.eyJ1IjoibWNoaW5kd2hpdGUiLCJhIjoiY2t1Y3p4Y3ZzMDB1MjJvcGM2NjA5bDcxaSJ9.TIeeLpxLA-Nb9WIjGcWiQw").then(function (geoResult) {
-        console.log(geoResult);
+        // console.log(geoResult);
         let lon = geoResult[0];
         let lat = geoResult[1];
 
@@ -17,7 +17,7 @@ $("#searchform").click(function (e) {
             units: "imperial",
             exclude: "minutely,hourly",
         }).done(function (data) {
-            console.log(data);
+            // console.log(data);
             $(".current-border").css("visibility", "visible");
             let todaysDate = data.current.dt;
             $("#current-heading").html(`<h1>Current Conditions</h1>`);
@@ -27,7 +27,7 @@ $("#searchform").click(function (e) {
             $("#coordinates").html(`<p>Coordinates: Lat: ${data.lat} Lon: ${data.lon}</p>`);
 
             reverseGeocodeRef(data.lat, data.lon, "pk.eyJ1IjoibWNoaW5kd2hpdGUiLCJhIjoiY2t1Y3p4Y3ZzMDB1MjJvcGM2NjA5bDcxaSJ9.TIeeLpxLA-Nb9WIjGcWiQw").then(function (res) {
-                console.log(res);
+                // console.log(res);
                 $("#current-location").html(`Location: ${res}`)
             }); //end of reverseGeocodeRef
 
