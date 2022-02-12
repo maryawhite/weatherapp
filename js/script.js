@@ -5,6 +5,8 @@ $("#searchform").click(function (e) {
     let query = $("#search").val();
     console.log(query);
 
+    let mapboxApiKey = process.env.mapboxApiKey;
+
     geocode(query, mapboxApiKey).then(function (geoResult) {
         console.log(geoResult);
         let lon = geoResult[0];
