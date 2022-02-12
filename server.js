@@ -5,9 +5,9 @@ const path = require('path');
 //where we expose files or directories for public use
 app.use(express.static(path.join(__dirname)));
 
-mapboxApiKey = process.env.mapboxApiKey;
+mapboxApiKey=process.env.mapboxApiKey;
 // const openWeatherAppKey = process.env.openWeatherAppKey;
-openWeatherAppRedo = process.env.openWeatherAppRedo;
+openWeatherAppRedo=process.env.openWeatherAppRedo;
 
 //where we set our routes
 app.get('/', function (req, res) {
