@@ -4,7 +4,7 @@
   "description": "weathermap project",
   "main": "index.js",
   "scripts": {
-    "start": "mapboxApiKey=process.env.mapboxApiKey node server.js",
+    "start": "mapboxApiKey openWeatherAppRedo node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
