@@ -1,19 +1,17 @@
 "use strict"
-let mapboxApiKey = process.env.mapboxApiKey;
-
 
 $("#searchform").click(function (e) {
     e.preventDefault();
     let query = $("#search").val();
     console.log(query);
 
-    geocode(query, mapboxApiKey).then(function (geoResult) {
+    geocode(query, "pk.eyJ1IjoibWNoaW5kd2hpdGUiLCJhIjoiY2t1Y3p4Y3ZzMDB1MjJvcGM2NjA5bDcxaSJ9.TIeeLpxLA-Nb9WIjGcWiQw").then(function (geoResult) {
         console.log(geoResult);
         let lon = geoResult[0];
         let lat = geoResult[1];
 
         $.get("https://api.openweathermap.org/data/2.5/onecall", {
-            APPID: openWeatherAppRedo,
+            APPID: "88818f073f2def19b2c43033775a8cc5",
             lat: lat,
             lon: lon,
             units: "imperial",
@@ -28,7 +26,7 @@ $("#searchform").click(function (e) {
             $("#current-humidity").html(`<p> Current Humidity: ${data.current.humidity}&#37;</p>`);
             $("#coordinates").html(`<p>Coordinates: Lat: ${data.lat} Lon: ${data.lon}</p>`);
 
-            reverseGeocodeRef(data.lat, data.lon, mapboxApiKey).then(function (res) {
+            reverseGeocodeRef(data.lat, data.lon, "pk.eyJ1IjoibWNoaW5kd2hpdGUiLCJhIjoiY2t1Y3p4Y3ZzMDB1MjJvcGM2NjA5bDcxaSJ9.TIeeLpxLA-Nb9WIjGcWiQw").then(function (res) {
                 console.log(res);
                 $("#current-location").html(`Location: ${res}`)
             }); //end of reverseGeocodeRef
