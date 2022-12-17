@@ -17,7 +17,7 @@ $("#searchform").click(function (e) {
             units: "imperial",
             exclude: "minutely,hourly",
         }).done(function (data) {
-            // console.log(data);
+            console.log(data);
             $(".current-border").css("visibility", "visible");
             let todaysDate = data.current.dt;
             $("#current-heading").html(`<h1>Current Conditions</h1>`);
